@@ -21,9 +21,12 @@ namespace DateConv
             comboBoxHebChodesh.TextChanged += ComboBoxHeb_TextChanged;
             comboBoxHebShana.TextChanged += ComboBoxHeb_TextChanged;
             comboBoxHebElef.TextChanged += ComboBoxHeb_TextChanged;
-            this.listBoxGreg.DoubleClick += new System.EventHandler(this.listBox_DoubleClick);
-            this.listBoxHeb.DoubleClick += new System.EventHandler(this.listBox_DoubleClick);
-            
+            ListBoxHeb.Scrolled += SyncListBox1_Scrolled;             // חיבור האירוע לטבלה הראשונה
+            ListBoxGreg.Scrolled += SyncListBox2_Scrolled;             // חיבור האירוע לטבלה השנייה
+            this.ListBoxGreg.DoubleClick += new System.EventHandler(this.listBox_DoubleClick);
+            this.ListBoxHeb.DoubleClick += new System.EventHandler(this.listBox_DoubleClick);
+            ListBoxGreg.SelectedIndexChanged += SyncListBoxes;
+            ListBoxHeb.SelectedIndexChanged += SyncListBoxes;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -167,8 +170,8 @@ namespace DateConv
                 // Save the date
                 string gregDate = $"{customDate.Day}/{customDate.Month}/{customDate.Year}";
                 string hebDate = customHebDate.GetHebDate();
-                listBoxGreg.Items.Add(gregDate);
-                listBoxHeb.Items.Add(hebDate);
+                ListBoxGreg.Items.Add(gregDate);
+                ListBoxHeb.Items.Add(hebDate);
             }
             else
             {
@@ -211,12 +214,44 @@ namespace DateConv
 
         private void buttonCopyGreg_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(customDate.GetDate().ToString());
+            if (AreAllControlsValid())
+            {
+                Clipboard.SetText($"{customDate.Day}/{customDate.Month}/{customDate.Year}");
+            }
         }
 
         private void buttonCopyHeb_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(customHebDate.GetHebDate());
+            if (AreAllControlsValid())
+            {
+                Clipboard.SetText(customHebDate.GetHebDate());
+            }
         }
+        private void SyncListBox1_Scrolled(object sender, ScrollEventArgs e)
+        {
+            ListBoxGreg.TopIndex = ListBoxHeb.TopIndex;              // סנכרון TopIndex
+        }
+
+        // כשגללו את התיבה השנייה, מגדירים את המיקום של הראשונה בהתאם
+        private void SyncListBox2_Scrolled(object sender, ScrollEventArgs e)
+        {
+            ListBoxHeb.TopIndex = ListBoxGreg.TopIndex;              // סנכרון TopIndex
+        }
+        private bool _isSyncing = false;
+
+        private void SyncListBoxes(object sender, EventArgs e)
+        {
+            if (_isSyncing) return;                // אם כבר בעיבוד – מתעלמים
+            _isSyncing = true;                     // מתחילים סנכרון
+
+            // בוחרים בפריט המקביל
+            if (sender == ListBoxGreg)
+                ListBoxHeb.SelectedIndex = ListBoxGreg.SelectedIndex;
+            else
+                ListBoxGreg.SelectedIndex = ListBoxHeb.SelectedIndex;
+
+            _isSyncing = false;                    // מסיימים סנכרון
+        }
+
     }
 }

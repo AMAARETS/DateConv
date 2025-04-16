@@ -1,4 +1,1218 @@
-﻿using System.Reflection;
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+<additional_info>
+
+</additional_info>
+
+</file_summary>
+
+<directory_structure>
+.gitattributes
+.gitignore
+CustomHebDate.cs
+CustomHebDate1.cs
+DateConv.csproj
+DateConv.sln
+DateConv/CustomDate.cs
+DateConv/CustomHebDate.cs
+Form1.cs
+Form1.Designer.cs
+Form1.Designer2.cs
+Form1.resx
+Gimatria.cs
+HebDate.cs
+LICENSE.txt
+Parse.cs
+Program.cs
+Properties/AssemblyInfo.cs
+Properties/Resources.Designer.cs
+Properties/Resources.resx
+Properties/Settings.Designer.cs
+Properties/Settings.settings
+README.md
+SyncListBox.cs
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="SyncListBox.cs">
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Windows.Forms;
+
+namespace DateConv
+{
+
+    public class SyncListBox : ListBox
+    {
+        public SyncListBox()
+        {
+            // אל תטרגו חריגות, ואל תנסו לגשת למשאבים חיצוניים בזמן עיצוב!
+        }
+        // הודעות גלילה
+        private const int WM_HSCROLL = 0x0114; // גלילה אופקית :contentReference[oaicite:15]{index=15}
+        private const int WM_VSCROLL = 0x0115; // גלילה אנכית :contentReference[oaicite:16]{index=16}
+        private const int WM_MOUSEWHEEL = 0x020A; // גלילה אנכית בגלגל :contentReference[oaicite:17]{index=17}
+        private const int WM_MOUSEHWHEEL = 0x020E; // גלילה אופקית בגלגל :contentReference[oaicite:18]{index=18}
+        private const int WM_KEYDOWN = 0x0100; // לחיצה על מקש :contentReference[oaicite:19]{index=19}
+        private const int WM_KEYUP = 0x0101; // שחרור מקש
+
+        // קודי מקשים
+        private const int VK_UP = 0x26;
+        private const int VK_DOWN = 0x28;
+        private const int VK_PRIOR = 0x21;
+        private const int VK_NEXT = 0x22;
+        private const int VK_HOME = 0x24;
+        private const int VK_END = 0x23;
+
+        // אירוע שמתרחש בכל גלילה
+        public event ScrollEventHandler Scrolled;
+
+        // דריסת WndProc כדי לתפוס הודעות גלילה :contentReference[oaicite:3]{index=3}
+        protected override void WndProc(ref Message m)
+        {
+            base.WndProc(ref m);  // נותן למערכת לטפל קודם בהודעה
+
+            bool isScrollMsg =
+                m.Msg == WM_HSCROLL ||
+                m.Msg == WM_VSCROLL ||
+                m.Msg == WM_MOUSEWHEEL ||
+                m.Msg == WM_MOUSEHWHEEL;
+
+            bool isKeyScroll = false;
+            if (m.Msg == WM_KEYDOWN)
+            {
+                // בדיקה של כל מקשי הגלילה במקלדת
+                int vk = m.WParam.ToInt32();
+                isKeyScroll =
+                    vk == VK_DOWN || // חץ למטה
+                    vk == VK_UP || // חץ למעלה
+                    vk == VK_PRIOR || // Page Up
+                    vk == VK_NEXT || // Page Down
+                    vk == VK_HOME || // Home
+                    vk == VK_END;      // End
+            }
+
+            if (isScrollMsg || isKeyScroll)
+            {
+                // הפעלת האירוע עם המיקום החדש (TopIndex) של הפריט הראשון הנראה
+                Scrolled?.Invoke(this, new ScrollEventArgs(
+                    ScrollEventType.EndScroll, this.TopIndex));
+            }
+        }
+    }
+}
+</file>
+
+<file path=".gitattributes">
+###############################################################################
+# Set default behavior to automatically normalize line endings.
+###############################################################################
+* text=auto
+
+###############################################################################
+# Set default behavior for command prompt diff.
+#
+# This is need for earlier builds of msysgit that does not have it on by
+# default for csharp files.
+# Note: This is only used by command line
+###############################################################################
+#*.cs     diff=csharp
+
+###############################################################################
+# Set the merge driver for project and solution files
+#
+# Merging from the command prompt will add diff markers to the files if there
+# are conflicts (Merging from VS is not affected by the settings below, in VS
+# the diff markers are never inserted). Diff markers may cause the following 
+# file extensions to fail to load in VS. An alternative would be to treat
+# these files as binary and thus will always conflict and require user
+# intervention with every merge. To do so, just uncomment the entries below
+###############################################################################
+#*.sln       merge=binary
+#*.csproj    merge=binary
+#*.vbproj    merge=binary
+#*.vcxproj   merge=binary
+#*.vcproj    merge=binary
+#*.dbproj    merge=binary
+#*.fsproj    merge=binary
+#*.lsproj    merge=binary
+#*.wixproj   merge=binary
+#*.modelproj merge=binary
+#*.sqlproj   merge=binary
+#*.wwaproj   merge=binary
+
+###############################################################################
+# behavior for image files
+#
+# image files are treated as binary by default.
+###############################################################################
+#*.jpg   binary
+#*.png   binary
+#*.gif   binary
+
+###############################################################################
+# diff behavior for common document formats
+# 
+# Convert binary document formats to text before diffing them. This feature
+# is only available from the command line. Turn it on by uncommenting the 
+# entries below.
+###############################################################################
+#*.doc   diff=astextplain
+#*.DOC   diff=astextplain
+#*.docx  diff=astextplain
+#*.DOCX  diff=astextplain
+#*.dot   diff=astextplain
+#*.DOT   diff=astextplain
+#*.pdf   diff=astextplain
+#*.PDF   diff=astextplain
+#*.rtf   diff=astextplain
+#*.RTF   diff=astextplain
+</file>
+
+<file path=".gitignore">
+## Ignore Visual Studio temporary files, build results, and
+## files generated by popular Visual Studio add-ons.
+##
+## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# User-specific files (MonoDevelop/Xamarin Studio)
+*.userprefs
+
+# Mono auto generated files
+mono_crash.*
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio 2015/2017 cache/options directory
+.vs/
+# Uncomment if you have tasks that create the project's static files in wwwroot
+#wwwroot/
+
+# Visual Studio 2017 auto generated files
+Generated\ Files/
+
+# MSTest test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# NUnit
+*.VisualState.xml
+TestResult.xml
+nunit-*.xml
+
+# Build Results of an ATL Project
+[Dd]ebugPS/
+[Rr]eleasePS/
+dlldata.c
+
+# Benchmark Results
+BenchmarkDotNet.Artifacts/
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# StyleCop
+StyleCopReport.xml
+
+# Files built by Visual Studio
+*_i.c
+*_p.c
+*_h.h
+*.ilk
+*.meta
+*.obj
+*.iobj
+*.pch
+*.pdb
+*.ipdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_proj
+*_wpftmp.csproj
+*.log
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.svclog
+*.scc
+
+# Chutzpah Test files
+_Chutzpah*
+
+# Visual C++ cache files
+ipch/
+*.aps
+*.ncb
+*.opendb
+*.opensdf
+*.sdf
+*.cachefile
+*.VC.db
+*.VC.VC.opendb
+
+# Visual Studio profiler
+*.psess
+*.vsp
+*.vspx
+*.sap
+
+# Visual Studio Trace Files
+*.e2e
+
+# TFS 2012 Local Workspace
+$tf/
+
+# Guidance Automation Toolkit
+*.gpState
+
+# ReSharper is a .NET coding add-in
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# TeamCity is a build add-in
+_TeamCity*
+
+# DotCover is a Code Coverage Tool
+*.dotCover
+
+# AxoCover is a Code Coverage Tool
+.axoCover/*
+!.axoCover/settings.json
+
+# Coverlet is a free, cross platform Code Coverage Tool
+coverage*.json
+coverage*.xml
+coverage*.info
+
+# Visual Studio code coverage results
+*.coverage
+*.coveragexml
+
+# NCrunch
+_NCrunch_*
+.*crunch*.local.xml
+nCrunchTemp_*
+
+# MightyMoose
+*.mm.*
+AutoTest.Net/
+
+# Web workbench (sass)
+.sass-cache/
+
+# Installshield output folder
+[Ee]xpress/
+
+# DocProject is a documentation generator add-in
+DocProject/buildhelp/
+DocProject/Help/*.HxT
+DocProject/Help/*.HxC
+DocProject/Help/*.hhc
+DocProject/Help/*.hhk
+DocProject/Help/*.hhp
+DocProject/Help/Html2
+DocProject/Help/html
+
+# Click-Once directory
+publish/
+
+# Publish Web Output
+*.[Pp]ublish.xml
+*.azurePubxml
+# Note: Comment the next line if you want to checkin your web deploy settings,
+# but database connection strings (with potential passwords) will be unencrypted
+*.pubxml
+*.publishproj
+
+# Microsoft Azure Web App publish settings. Comment the next line if you want to
+# checkin your Azure Web App publish settings, but sensitive information contained
+# in these scripts will be unencrypted
+PublishScripts/
+
+# NuGet Packages
+*.nupkg
+# NuGet Symbol Packages
+*.snupkg
+# The packages folder can be ignored because of Package Restore
+**/[Pp]ackages/*
+# except build/, which is used as an MSBuild target.
+!**/[Pp]ackages/build/
+# Uncomment if necessary however generally it will be regenerated when needed
+#!**/[Pp]ackages/repositories.config
+# NuGet v3's project.json files produces more ignorable files
+*.nuget.props
+*.nuget.targets
+
+# Microsoft Azure Build Output
+csx/
+*.build.csdef
+
+# Microsoft Azure Emulator
+ecf/
+rcf/
+
+# Windows Store app package directories and files
+AppPackages/
+BundleArtifacts/
+Package.StoreAssociation.xml
+_pkginfo.txt
+*.appx
+*.appxbundle
+*.appxupload
+
+# Visual Studio cache files
+# files ending in .cache can be ignored
+*.[Cc]ache
+# but keep track of directories ending in .cache
+!?*.[Cc]ache/
+
+# Others
+ClientBin/
+~$*
+*~
+*.dbmdl
+*.dbproj.schemaview
+*.jfm
+*.pfx
+*.publishsettings
+orleans.codegen.cs
+
+# Including strong name files can present a security risk
+# (https://github.com/github/gitignore/pull/2483#issue-259490424)
+#*.snk
+
+# Since there are multiple workflows, uncomment next line to ignore bower_components
+# (https://github.com/github/gitignore/pull/1529#issuecomment-104372622)
+#bower_components/
+
+# RIA/Silverlight projects
+Generated_Code/
+
+# Backup & report files from converting an old project file
+# to a newer Visual Studio version. Backup files are not needed,
+# because we have git ;-)
+_UpgradeReport_Files/
+Backup*/
+UpgradeLog*.XML
+UpgradeLog*.htm
+ServiceFabricBackup/
+*.rptproj.bak
+
+# SQL Server files
+*.mdf
+*.ldf
+*.ndf
+
+# Business Intelligence projects
+*.rdl.data
+*.bim.layout
+*.bim_*.settings
+*.rptproj.rsuser
+*- [Bb]ackup.rdl
+*- [Bb]ackup ([0-9]).rdl
+*- [Bb]ackup ([0-9][0-9]).rdl
+
+# Microsoft Fakes
+FakesAssemblies/
+
+# GhostDoc plugin setting file
+*.GhostDoc.xml
+
+# Node.js Tools for Visual Studio
+.ntvs_analysis.dat
+node_modules/
+
+# Visual Studio 6 build log
+*.plg
+
+# Visual Studio 6 workspace options file
+*.opt
+
+# Visual Studio 6 auto-generated workspace file (contains which files were open etc.)
+*.vbw
+
+# Visual Studio LightSwitch build output
+**/*.HTMLClient/GeneratedArtifacts
+**/*.DesktopClient/GeneratedArtifacts
+**/*.DesktopClient/ModelManifest.xml
+**/*.Server/GeneratedArtifacts
+**/*.Server/ModelManifest.xml
+_Pvt_Extensions
+
+# Paket dependency manager
+.paket/paket.exe
+paket-files/
+
+# FAKE - F# Make
+.fake/
+
+# CodeRush personal settings
+.cr/personal
+
+# Python Tools for Visual Studio (PTVS)
+__pycache__/
+*.pyc
+
+# Cake - Uncomment if you are using it
+# tools/**
+# !tools/packages.config
+
+# Tabs Studio
+*.tss
+
+# Telerik's JustMock configuration file
+*.jmconfig
+
+# BizTalk build output
+*.btp.cs
+*.btm.cs
+*.odx.cs
+*.xsd.cs
+
+# OpenCover UI analysis results
+OpenCover/
+
+# Azure Stream Analytics local run output
+ASALocalRun/
+
+# MSBuild Binary and Structured Log
+*.binlog
+
+# NVidia Nsight GPU debugger configuration file
+*.nvuser
+
+# MFractors (Xamarin productivity tool) working folder
+.mfractor/
+
+# Local History for Visual Studio
+.localhistory/
+
+# BeatPulse healthcheck temp database
+healthchecksdb
+
+# Backup folder for Package Reference Convert tool in Visual Studio 2017
+MigrationBackup/
+
+# Ionide (cross platform F# VS Code tools) working folder
+.ionide/
+
+# Fody - auto-generated XML schema
+FodyWeavers.xsd
+</file>
+
+<file path="CustomHebDate.cs">
+using System;
+
+namespace DateConv
+{
+    internal class CustomHebDate
+    {
+        private string _day;
+        private string _month;
+        private string _year;
+        private string _elef;
+        //private HebDate hebDate;
+        //private Gimatria gimatria;
+        public string Day
+        {
+            get { return _day; }
+            set { _day = value; }
+        }
+
+        public string Month
+        {
+            get { return _month; }
+            set { _month = value; }
+        }
+
+        public string Year
+        {
+            get { return _year; }
+            set { _year = value; }
+        }
+
+        public string Elef
+        {
+            get { return _elef; }
+            set { _elef = value; }
+        }
+
+        public string GetHebDate()
+        {
+            return $"{_day} {_month} {_elef}'{_year}";
+        }
+        public void setHebDate(DateTime Date)
+        {
+            // Convert the input Gregorian date to a Hebrew date
+
+            try
+            {
+                int[] hebrewDate = HebDate.ConvertToHebrewDate(Date);
+                //hebDate = new HebDate();
+                //gimatria = new Gimatria();
+                _day = Gimatria.GimatriaToHebrewLetters(hebrewDate[0]);
+                _month = Gimatria.NumberToHebChodesName(hebrewDate[1], hebrewDate[2] + (hebrewDate[3])*1000);
+                _year = Gimatria.GimatriaToHebrewLetters(hebrewDate[2]);
+                _elef = Gimatria.GimatriaToHebrewLetters(hebrewDate[3]);
+
+            }
+            catch (ArgumentException)
+            {
+                //throw new ArgumentException("Invalid Gregorian date format.");
+                _day = "kkkkk";
+            }
+        }
+    }
+}
+</file>
+
+<file path="CustomHebDate1.cs">
+using System;
+
+namespace DateConv
+{
+    internal class CustomHebDate
+    {
+        private string _day;
+        private string _month;
+        private string _year;
+
+        public string Day
+        {
+            get { return _day; }
+            set { _day = value; }
+        }
+
+        public string Month
+        {
+            get { return _month; }
+            set { _month = value; }
+        }
+
+        public string Year
+        {
+            get { return _year; }
+            set { _year = value; }
+        }
+
+        public string GetHebDate
+        {
+            return $"{_day} {_month} {_year}";
+        }
+        public void setHebDate (DataTime Date)
+        {
+                // Convert the input Gregorian date to a Hebrew date
+                
+                if (DateTime.TryParse(value, out Date))
+                {
+                    string hebrewDate = HebDate.ConvertToHebrewDate(Date);
+                    var parts = hebrewDate.Split(' ');
+
+                    if (parts.Length == 3)
+                    {
+                        _day = parts[0];
+                        _month = parts[1];
+                        _year = parts[2];
+                    }
+                    else
+                    {
+                        throw new ArgumentException("Invalid Hebrew date format.");
+                    }
+                }
+                else
+                {
+                    throw new ArgumentException("Invalid Gregorian date format.");
+                }
+            }
+        }
+    }
+}
+</file>
+
+<file path="DateConv.csproj">
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D1FCE3ED-63E1-4151-84A7-9A0F2088720A}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>DateConv</RootNamespace>
+    <AssemblyName>DateConv</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="C:/t/.net/DateConv/DateConv/\CustomDate.cs">
+      <Link>CustomDate.cs</Link>
+    </Compile>
+    <Compile Include="CustomHebDate.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gimatria.cs" />
+    <Compile Include="HebDate.cs" />
+    <Compile Include="Parse.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SyncListBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
+</file>
+
+<file path="DateConv.sln">
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35919.96 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DateConv", "DateConv.csproj", "{D1FCE3ED-63E1-4151-84A7-9A0F2088720A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D1FCE3ED-63E1-4151-84A7-9A0F2088720A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1FCE3ED-63E1-4151-84A7-9A0F2088720A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1FCE3ED-63E1-4151-84A7-9A0F2088720A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1FCE3ED-63E1-4151-84A7-9A0F2088720A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6F772F44-CD5E-459F-AB13-77F731B9E83D}
+	EndGlobalSection
+EndGlobal
+</file>
+
+<file path="DateConv/CustomDate.cs">
+using System;
+
+namespace DateConv
+{
+    internal class CustomDate
+    {
+        private int _day;
+        private int _month;
+        private int _year;
+
+        public int Day
+        {
+            get { return _day; }
+            set { _day = value; }
+        }
+
+        public int Month
+        {
+            get { return _month; }
+            set { _month = value; }
+        }
+
+        public int Year
+        {
+            get { return _year; }
+            set { _year = value; }
+        }
+
+        public void SetDate(DateTime date)
+        {
+            _day = date.Day;
+            _month = date.Month;
+            _year = date.Year;
+        }
+
+        public DateTime GetDate()
+        {
+            try
+            {
+                return new DateTime(_year, _month, _day);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                if (_day > 28)
+                {
+                        for (int i = 1; i < 4; i++)
+                        {
+                        try
+                        {
+                            DateTime dateNisuy = new DateTime(_year, _month, _day - i);
+                            throw new ArgumentException($"בחודש זה ישנם רק {_day-i} ימים");
+                        }
+                        catch (ArgumentOutOfRangeException)
+                        {
+                        }
+                    }
+                }
+                // Handle the case where the date is invalid
+                throw new ArgumentException("הערך לא תקין");
+            }
+        }
+    }
+}
+</file>
+
+<file path="DateConv/CustomHebDate.cs">
+using System;
+
+namespace DateConv
+{
+    internal class CustomHebDate
+    {
+        private string _day;
+        private string _month;
+        private string _year;
+
+        public string Day
+        {
+            get { return _day; }
+            set { _day = value; }
+        }
+
+        public string Month
+        {
+            get { return _month; }
+            set { _month = value; }
+        }
+
+        public string Year
+        {
+            get { return _year; }
+            set { _year = value; }
+        }
+
+        public string GetHebDate
+        {
+            return $"{_day} {_month} {_year}";
+        }
+        public void setHebDate (DataTime Date)
+        {
+                // Convert the input Gregorian date to a Hebrew date
+                
+                if (DateTime.TryParse(value, out Date))
+                {
+                    string hebrewDate = HebDate.ConvertToHebrewDate(Date);
+                    var parts = hebrewDate.Split(' ');
+
+                    if (parts.Length == 3)
+                    {
+                        _day = parts[0];
+                        _month = parts[1];
+                        _year = parts[2];
+                    }
+                    else
+                    {
+                        throw new ArgumentException("Invalid Hebrew date format.");
+                    }
+                }
+                else
+                {
+                    throw new ArgumentException("Invalid Gregorian date format.");
+                }
+            }
+        }
+    }
+}
+</file>
+
+<file path="Form1.cs">
+using System;
+using System.Windows.Forms;
+//using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
+namespace DateConv
+{
+    public partial class Form1 : Form
+    {
+        private CustomDate customDate; // Add a field to hold the CustomDate instance
+        private CustomHebDate customHebDate; // Add a field to hold the CustomHebDate instance        
+        private bool isProgrammaticChange = false;
+        public Form1()
+        {
+            InitializeComponent();
+
+            // Attach the event handler to all combo boxes
+            comboBoxGregYom.TextChanged += ComboBoxGreg_TextChanged;
+            comboBoxGregChodesh.TextChanged += ComboBoxGreg_TextChanged;
+            comboBoxGregShana.TextChanged += ComboBoxGreg_TextChanged;
+            comboBoxHebYom.TextChanged += ComboBoxHeb_TextChanged;
+            comboBoxHebChodesh.TextChanged += ComboBoxHeb_TextChanged;
+            comboBoxHebShana.TextChanged += ComboBoxHeb_TextChanged;
+            comboBoxHebElef.TextChanged += ComboBoxHeb_TextChanged;
+            ListBoxHeb.Scrolled += SyncListBox1_Scrolled;             // חיבור האירוע לטבלה הראשונה
+            ListBoxGreg.Scrolled += SyncListBox2_Scrolled;             // חיבור האירוע לטבלה השנייה
+            this.ListBoxGreg.DoubleClick += new System.EventHandler(this.listBox_DoubleClick);
+            this.ListBoxHeb.DoubleClick += new System.EventHandler(this.listBox_DoubleClick);
+            
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            // Initialize the CustomDate instance with the current date
+            customDate = new CustomDate();
+            customDate.SetDate(DateTime.Now);
+            customHebDate = new CustomHebDate();
+            customHebDate.setHebDate(customDate.GetDate());
+            HagComBoxs();
+        }
+        private void HagComBoxs()
+        {
+            isProgrammaticChange = true; // סימון שהשינוי תכנותי
+
+            comboBoxGregYom.SelectedIndex = customDate.Day - 1;
+            comboBoxGregChodesh.SelectedIndex = customDate.Month - 1;
+            comboBoxGregShana.SelectedIndex = customDate.Year - 1;
+
+            comboBoxHebYom.Text = customHebDate.Day.ToString();
+            comboBoxHebChodesh.Text = customHebDate.Month.ToString();
+            comboBoxHebShana.Text = customHebDate.Year.ToString();
+            comboBoxHebElef.Text = customHebDate.Elef.ToString();
+
+            isProgrammaticChange = false; // חזרה למצב רגיל
+        }
+
+        private void ComboBoxGreg_TextChanged(object sender, EventArgs e)
+        {
+            if (isProgrammaticChange) return; // התעלם משינויים תכנותיים
+
+
+            if (sender is ComboBox comboBox)
+            {
+                errorProvider1.SetError(comboBox, string.Empty);
+                errorProvider1.SetError(comboBoxGregYom, string.Empty);
+                try
+                {
+                    // Handle changes based on the specific combo box
+                    switch (comboBox.Name)
+                    {
+                        case "comboBoxGregYom":
+                            customDate.Day = comboBox.SelectedIndex + 1;
+                            break;
+                        case "comboBoxGregChodesh":
+                            customDate.Month = comboBox.SelectedIndex + 1;
+                            break;
+                        case "comboBoxGregShana":
+                            customDate.Year = comboBox.SelectedIndex + 1;
+                            break;
+                    }
+
+                    customHebDate.setHebDate(customDate.GetDate());
+                }
+
+                catch (ArgumentException ex)
+                {
+                    if (string.IsNullOrEmpty(comboBox.Text) || !comboBox.Items.Contains(comboBox.Text))
+                    {
+                        errorProvider1.SetError(comboBox, "ערך לא תקין");
+                    }
+                    else if (ex.Message.Contains("בחודש זה ישנם רק"))
+                    {
+                        // Handle the exception as needed
+                        errorProvider1.SetError(comboBoxGregYom, ex.Message);
+                    }
+                    else
+                    {
+                        errorProvider1.SetError(comboBox, "ערך לא תקין");
+                    }
+                    return;
+                }
+                HagComBoxs();
+            }
+        }
+
+        private void ComboBoxHeb_TextChanged(object sender, EventArgs e)
+        {
+            if (isProgrammaticChange) return; // התעלם משינויים תכנותיים
+            {
+
+                if (sender is ComboBox comboBox)
+                {
+                    errorProvider1.SetError(comboBox, string.Empty);
+                    errorProvider1.SetError(comboBoxHebYom, string.Empty);
+                    errorProvider1.SetError(comboBoxHebChodesh, string.Empty);
+
+                    // Handle changes based on the specific combo box
+
+                    switch (comboBox.Name)
+                    {
+                        case "comboBoxHebYom":
+                            customHebDate.Day = comboBox.Text;
+                            break;
+                        case "comboBoxHebChodesh":
+                            customHebDate.Month = comboBox.Text;
+                            break;
+                        case "comboBoxHebShana":
+                            customHebDate.Year = comboBox.Text;
+                            break;
+                        case "comboBoxHebElef":
+                            customHebDate.Elef = comboBox.Text;
+                            break;
+                    }
+                    try
+                    {
+                        customDate.SetDate(HebDate.convertStrToGregDate(customHebDate.GetHebDate()));
+                    }
+                    catch (ArgumentException ex)
+                    {
+                        if (string.IsNullOrEmpty(comboBox.Text) || !comboBox.Items.Contains(comboBox.Text))
+                        {
+                            errorProvider1.SetError(comboBox, "ערך לא תקין");
+                        }
+                        else if (ex.Message.Contains("בחודש שנבחר אין יום ל'."))
+                        {
+                            // Handle the exception as needed
+                            errorProvider1.SetError(comboBoxHebYom, ex.Message);
+                        }
+                        else if (ex.Message.Contains("השנה שנבחרה אינה מעוברת") || ex.Message.Contains("השנה שנבחרה הינה שנה מעוברת יש לבחור אדר א' או ב'"))
+                        {
+                            // Handle the exception as needed
+                            errorProvider1.SetError(comboBoxHebChodesh, ex.Message);
+                        }
+                        else
+                        {
+                            errorProvider1.SetError(comboBox, "ערך לא תקין");
+                        }
+                        return;
+                    }
+                    HagComBoxs();
+                }
+            }
+
+        }
+
+        private void buttonShmira_Click(object sender, EventArgs e)
+        {
+            if (AreAllControlsValid())
+            {
+                // Save the date
+                string gregDate = $"{customDate.Day}/{customDate.Month}/{customDate.Year}";
+                string hebDate = customHebDate.GetHebDate();
+                ListBoxGreg.Items.Add(gregDate);
+                ListBoxHeb.Items.Add(hebDate);
+            }
+            else
+            {
+
+            }
+        }
+        private bool AreAllControlsValid()
+        {
+            foreach (Control control in this.Controls)
+            {
+                if (!string.IsNullOrEmpty(errorProvider1.GetError(control)))
+                {
+                    return false; // יש שגיאה באחד הפקדים
+                }
+            }
+            return true; // אין שגיאות
+        }
+        private void listBox_DoubleClick(object sender, EventArgs e)
+        {
+            if (sender is ListBox listBox && listBox.SelectedItem != null)
+            {
+                // העתקת התוכן של הפריט הנבחר ללוח
+                Clipboard.SetText(listBox.SelectedItem.ToString());
+            }
+        }
+
+        private void dateTimePickerGreg_ValueChanged(object sender, EventArgs e)
+        {
+            customDate.SetDate(dateTimePickerGreg.Value);
+            customHebDate.setHebDate(customDate.GetDate());
+            HagComBoxs();
+        }
+
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+            customDate.SetDate(dateTimePickerGreg.Value);
+            customHebDate.setHebDate(customDate.GetDate());
+            HagComBoxs();
+        }
+
+        private void buttonCopyGreg_Click(object sender, EventArgs e)
+        {
+            if (AreAllControlsValid())
+            {
+                Clipboard.SetText($"{customDate.Day}/{customDate.Month}/{customDate.Year}");
+            }
+        }
+
+        private void buttonCopyHeb_Click(object sender, EventArgs e)
+        {
+            if (AreAllControlsValid())
+            {
+                Clipboard.SetText(customHebDate.GetHebDate());
+            }
+        }
+        private void SyncListBox1_Scrolled(object sender, ScrollEventArgs e)
+        {
+            ListBoxGreg.TopIndex = ListBoxHeb.TopIndex;              // סנכרון TopIndex
+        }
+
+        // כשגללו את התיבה השנייה, מגדירים את המיקום של הראשונה בהתאם
+        private void SyncListBox2_Scrolled(object sender, ScrollEventArgs e)
+        {
+            ListBoxHeb.TopIndex = ListBoxGreg.TopIndex;              // סנכרון TopIndex
+        }
+    }
+}
+</file>
+
+<file path="Form1.Designer.cs">
+using System.Reflection;
 using DateConv;
 
 namespace DateConv
@@ -3645,3 +4859,1083 @@ namespace DateConv
         private SyncListBox ListBoxHeb;
     }
 }
+</file>
+
+<file path="Form1.Designer2.cs">
+namespace DateConv
+{
+    partial class Form1
+    {
+        private System.ComponentModel.IContainer components = null;
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+                components.Dispose();
+            base.Dispose(disposing);
+        }
+        #region Windows Form Designer generated code
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.comboBoxHebShana = new System.Windows.Forms.ComboBox();
+            this.comboBoxHebElef = new System.Windows.Forms.ComboBox();
+            this.comboBoxHebChodesh = new System.Windows.Forms.ComboBox();
+            this.comboBoxHebYom = new System.Windows.Forms.ComboBox();
+            this.comboBoxGregShana = new System.Windows.Forms.ComboBox();
+            this.comboBoxGregChodesh = new System.Windows.Forms.ComboBox();
+            this.comboBoxGregYom = new System.Windows.Forms.ComboBox();
+            this.dateTimePickerGreg = new System.Windows.Forms.DateTimePicker();
+            this.labelShanaGreg = new System.Windows.Forms.Label();
+            this.labelChodeshGreg = new System.Windows.Forms.Label();
+            this.labelYomGreg = new System.Windows.Forms.Label();
+            this.groupBoxHeb = new System.Windows.Forms.GroupBox();
+            this.groupBoxGreg = new System.Windows.Forms.GroupBox();
+            this.listBoxHeb = new System.Windows.Forms.ListBox();
+            this.listBoxGreg = new System.Windows.Forms.ListBox();
+            this.buttonShmira = new System.Windows.Forms.Button();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.groupBoxHeb.SuspendLayout();
+            this.groupBoxGreg.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(12, 12);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker1.TabIndex = 0;
+            // 
+            // comboBoxHebShana
+            // 
+            this.comboBoxHebShana.FormattingEnabled = true;
+            this.comboBoxHebShana.Location = new System.Drawing.Point(4, 12);
+            this.comboBoxHebShana.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxHebShana.Name = "comboBoxHebShana";
+            this.comboBoxHebShana.Size = new System.Drawing.Size(82, 21);
+            this.comboBoxHebShana.TabIndex = 1;
+            // 
+            // comboBoxHebElef
+            // 
+            this.comboBoxHebElef.FormattingEnabled = true;
+            this.comboBoxHebElef.Location = new System.Drawing.Point(89, 12);
+            this.comboBoxHebElef.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxHebElef.Name = "comboBoxHebElef";
+            this.comboBoxHebElef.Size = new System.Drawing.Size(82, 21);
+            this.comboBoxHebElef.TabIndex = 2;
+            // 
+            // comboBoxHebChodesh
+            // 
+            this.comboBoxHebChodesh.FormattingEnabled = true;
+            this.comboBoxHebChodesh.Location = new System.Drawing.Point(173, 12);
+            this.comboBoxHebChodesh.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxHebChodesh.Name = "comboBoxHebChodesh";
+            this.comboBoxHebChodesh.Size = new System.Drawing.Size(82, 21);
+            this.comboBoxHebChodesh.TabIndex = 3;
+            // 
+            // comboBoxHebYom
+            // 
+            this.comboBoxHebYom.FormattingEnabled = true;
+            this.comboBoxHebYom.Location = new System.Drawing.Point(258, 12);
+            this.comboBoxHebYom.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxHebYom.Name = "comboBoxHebYom";
+            this.comboBoxHebYom.Size = new System.Drawing.Size(82, 21);
+            this.comboBoxHebYom.TabIndex = 4;
+            // 
+            // comboBoxGregShana
+            // 
+            this.comboBoxGregShana.FormattingEnabled = true;
+            this.comboBoxGregShana.Location = new System.Drawing.Point(4, 12);
+            this.comboBoxGregShana.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxGregShana.Name = "comboBoxGregShana";
+            this.comboBoxGregShana.Size = new System.Drawing.Size(82, 21);
+            this.comboBoxGregShana.TabIndex = 5;
+            // 
+            // comboBoxGregChodesh
+            // 
+            this.comboBoxGregChodesh.FormattingEnabled = true;
+            this.comboBoxGregChodesh.Location = new System.Drawing.Point(89, 12);
+            this.comboBoxGregChodesh.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxGregChodesh.Name = "comboBoxGregChodesh";
+            this.comboBoxGregChodesh.Size = new System.Drawing.Size(82, 21);
+            this.comboBoxGregChodesh.TabIndex = 6;
+            // 
+            // comboBoxGregYom
+            // 
+            this.comboBoxGregYom.FormattingEnabled = true;
+            this.comboBoxGregYom.Location = new System.Drawing.Point(173, 12);
+            this.comboBoxGregYom.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxGregYom.Name = "comboBoxGregYom";
+            this.comboBoxGregYom.Size = new System.Drawing.Size(82, 21);
+            this.comboBoxGregYom.TabIndex = 7;
+            // 
+            // dateTimePickerGreg
+            // 
+            this.dateTimePickerGreg.Location = new System.Drawing.Point(258, 12);
+            this.dateTimePickerGreg.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dateTimePickerGreg.Name = "dateTimePickerGreg";
+            this.dateTimePickerGreg.Size = new System.Drawing.Size(135, 20);
+            this.dateTimePickerGreg.TabIndex = 8;
+            // 
+            // labelShanaGreg
+            // 
+            this.labelShanaGreg.AutoSize = true;
+            this.labelShanaGreg.Location = new System.Drawing.Point(4, 28);
+            this.labelShanaGreg.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelShanaGreg.Name = "labelShanaGreg";
+            this.labelShanaGreg.Size = new System.Drawing.Size(31, 13);
+            this.labelShanaGreg.TabIndex = 9;
+            this.labelShanaGreg.Text = "שנה:";
+            // 
+            // labelChodeshGreg
+            // 
+            this.labelChodeshGreg.AutoSize = true;
+            this.labelChodeshGreg.Location = new System.Drawing.Point(89, 28);
+            this.labelChodeshGreg.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelChodeshGreg.Name = "labelChodeshGreg";
+            this.labelChodeshGreg.Size = new System.Drawing.Size(38, 13);
+            this.labelChodeshGreg.TabIndex = 10;
+            this.labelChodeshGreg.Text = "חודש:";
+            // 
+            // labelYomGreg
+            // 
+            this.labelYomGreg.AutoSize = true;
+            this.labelYomGreg.Location = new System.Drawing.Point(173, 28);
+            this.labelYomGreg.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelYomGreg.Name = "labelYomGreg";
+            this.labelYomGreg.Size = new System.Drawing.Size(27, 13);
+            this.labelYomGreg.TabIndex = 11;
+            this.labelYomGreg.Text = "יום:";
+            // 
+            // groupBoxHeb
+            // 
+            this.groupBoxHeb.Controls.Add(this.comboBoxHebShana);
+            this.groupBoxHeb.Controls.Add(this.comboBoxHebElef);
+            this.groupBoxHeb.Controls.Add(this.comboBoxHebChodesh);
+            this.groupBoxHeb.Controls.Add(this.comboBoxHebYom);
+            this.groupBoxHeb.Location = new System.Drawing.Point(7, 46);
+            this.groupBoxHeb.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxHeb.Name = "groupBoxHeb";
+            this.groupBoxHeb.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxHeb.Size = new System.Drawing.Size(347, 32);
+            this.groupBoxHeb.TabIndex = 12;
+            this.groupBoxHeb.TabStop = false;
+            this.groupBoxHeb.Text = "תאריך עברי";
+            // 
+            // groupBoxGreg
+            // 
+            this.groupBoxGreg.Controls.Add(this.dateTimePickerGreg);
+            this.groupBoxGreg.Controls.Add(this.labelShanaGreg);
+            this.groupBoxGreg.Controls.Add(this.comboBoxGregShana);
+            this.groupBoxGreg.Controls.Add(this.labelChodeshGreg);
+            this.groupBoxGreg.Controls.Add(this.comboBoxGregChodesh);
+            this.groupBoxGreg.Controls.Add(this.labelYomGreg);
+            this.groupBoxGreg.Controls.Add(this.comboBoxGregYom);
+            this.groupBoxGreg.Location = new System.Drawing.Point(7, 84);
+            this.groupBoxGreg.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxGreg.Name = "groupBoxGreg";
+            this.groupBoxGreg.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxGreg.Size = new System.Drawing.Size(347, 52);
+            this.groupBoxGreg.TabIndex = 13;
+            this.groupBoxGreg.TabStop = false;
+            this.groupBoxGreg.Text = "תאריך לועזי";
+            // 
+            // listBoxHeb
+            // 
+            this.listBoxHeb.Location = new System.Drawing.Point(7, 178);
+            this.listBoxHeb.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.listBoxHeb.Name = "listBoxHeb";
+            this.listBoxHeb.Size = new System.Drawing.Size(168, 95);
+            this.listBoxHeb.TabIndex = 14;
+            // 
+            // listBoxGreg
+            // 
+            this.listBoxGreg.Location = new System.Drawing.Point(180, 178);
+            this.listBoxGreg.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.listBoxGreg.Name = "listBoxGreg";
+            this.listBoxGreg.Size = new System.Drawing.Size(175, 95);
+            this.listBoxGreg.TabIndex = 15;
+            // 
+            // buttonShmira
+            // 
+            this.buttonShmira.Location = new System.Drawing.Point(149, 148);
+            this.buttonShmira.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonShmira.Name = "buttonShmira";
+            this.buttonShmira.Size = new System.Drawing.Size(67, 26);
+            this.buttonShmira.TabIndex = 16;
+            this.buttonShmira.Text = "שמור";
+            this.buttonShmira.UseVisualStyleBackColor = true;
+            this.buttonShmira.Click += new System.EventHandler(this.buttonShmira_Click);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            this.errorProvider1.RightToLeft = true;
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(375, 298);
+            this.Controls.Add(this.buttonShmira);
+            this.Controls.Add(this.listBoxGreg);
+            this.Controls.Add(this.listBoxHeb);
+            this.Controls.Add(this.groupBoxHeb);
+            this.Controls.Add(this.groupBoxGreg);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Name = "Form1";
+            this.Text = "המרת תאריכים";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.groupBoxHeb.ResumeLayout(false);
+            this.groupBoxGreg.ResumeLayout(false);
+            this.groupBoxGreg.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            this.ResumeLayout(false);
+
+        }
+        #endregion
+
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.ComboBox comboBoxHebShana;
+        private System.Windows.Forms.ComboBox comboBoxHebElef;
+        private System.Windows.Forms.ComboBox comboBoxHebChodesh;
+        private System.Windows.Forms.ComboBox comboBoxHebYom;
+        private System.Windows.Forms.ComboBox comboBoxGregShana;
+        private System.Windows.Forms.ComboBox comboBoxGregChodesh;
+        private System.Windows.Forms.ComboBox comboBoxGregYom;
+        private System.Windows.Forms.DateTimePicker dateTimePickerGreg;
+        private System.Windows.Forms.Label labelShanaGreg;
+        private System.Windows.Forms.Label labelChodeshGreg;
+        private System.Windows.Forms.Label labelYomGreg;
+        private System.Windows.Forms.GroupBox groupBoxHeb;
+        private System.Windows.Forms.GroupBox groupBoxGreg;
+        private System.Windows.Forms.ListBox listBoxHeb;
+        private System.Windows.Forms.ListBox listBoxGreg;
+        private System.Windows.Forms.Button buttonShmira;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+    }
+}
+</file>
+
+<file path="Form1.resx">
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <metadata name="errorProvider1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+</root>
+</file>
+
+<file path="Gimatria.cs">
+using System;
+using System.Globalization;
+
+namespace DateConv
+{
+    internal class Gimatria
+    {
+
+        public static int ConvertToGimatria(string hebrewText)
+        {
+            int total = 0;
+            for (int i = 0; i < hebrewText.Length; i++)
+            {
+                char c = hebrewText[i];
+
+                // Check if the character is a Hebrew letter
+                if (c >= 'א' && c <= 'ת')
+                {
+                    int value = GetGimatriaValue(c);
+
+                    // Check if the next character is a geresh (׳)
+                    if (i + 1 < hebrewText.Length && hebrewText[i + 1] == '\'')
+                    {
+                        value *= 1000; // Multiply the value by 1,000
+                        
+                    }
+
+                    total += value;
+                }
+            }
+            return total;
+        }
+        public static int GetGimatriaValue(char hebrewChar)
+        {
+            // Convert the Hebrew character to its Gimatria value
+            switch (hebrewChar)
+            {
+                case 'א': return 1;
+                case 'ב': return 2;
+                case 'ג': return 3;
+                case 'ד': return 4;
+                case 'ה': return 5;
+                case 'ו': return 6;
+                case 'ז': return 7;
+                case 'ח': return 8;
+                case 'ט': return 9;
+                case 'י': return 10;
+                case 'כ': return 20;
+                case 'ל': return 30;
+                case 'מ': return 40;
+                case 'נ': return 50;
+                case 'ס': return 60;
+                case 'ע': return 70;
+                case 'פ': return 80;
+                case 'צ': return 90;
+                case 'ק': return 100;
+                case 'ר': return 200;
+                case 'ש': return 300;
+                case 'ת': return 400;
+                default: return 0; // Non-Hebrew characters are ignored
+            }
+        }
+        public static string GimatriaToHebrewLetters(int number)
+        {
+            string strTemp = "";
+            if (number > 900)
+            {
+                strTemp += "תתק";
+            }
+            else if (number > 800)
+            {
+                strTemp += "תת";
+            }
+            else if (number > 700)
+            {
+                strTemp += "תש";
+            }
+            else if (number > 600)
+            {
+                strTemp += "תר";
+            }
+            else if (number > 500)
+            {
+                strTemp += "תק";
+            }
+            else if (number > 400)
+            {
+                strTemp += "ת";
+            }
+            else if (number > 300)
+            {
+                strTemp += "ש";
+            }
+            else if (number > 200)
+            {
+                strTemp += "ר";
+            }
+            else if (number > 100)
+            {
+                strTemp += "ק";
+            }
+            int Digit = (number % 100) / 10;
+
+            if (Digit > 0)
+            {
+                switch (Digit)
+                {
+                    case 1: strTemp += "י"; break;
+                    case 2: strTemp += "כ"; break;
+                    case 3: strTemp += "ל"; break;
+                    case 4: strTemp += "מ"; break;
+                    case 5: strTemp += "נ"; break;
+                    case 6: strTemp += "ס"; break;
+                    case 7: strTemp += "ע"; break;
+                    case 8: strTemp += "פ"; break;
+                    case 9: strTemp += "צ"; break;
+                }
+            }
+            int Digit2 = number % 10;
+            if (Digit2 > 0)
+            {
+                switch (Digit2)
+                {
+                    case 1: strTemp += "א"; break;
+                    case 2: strTemp += "ב"; break;
+                    case 3: strTemp += "ג"; break;
+                    case 4: strTemp += "ד"; break;
+                    case 5: strTemp += "ה"; break;
+                    case 6: strTemp += "ו"; break;
+                    case 7: strTemp += "ז"; break;
+                    case 8: strTemp += "ח"; break;
+                    case 9: strTemp += "ט"; break;
+                }
+            }
+            //בדיקה אם קיים במשתנה STRTEMP הצירוף "יה" וא"כ להחליף ל"טו" ואת "יו" ל"טז" ו"רעה" ל"ערה" ו"רצח" ל"רחצ" ו"רע" ל"ער" ו"שד ל"דש" ושמד" לשדמ" 
+            if (strTemp.Contains("יה"))
+            {
+                strTemp = strTemp.Replace("יה", "טו");
+            }
+            else if (strTemp.Contains("יו"))
+            {
+                strTemp = strTemp.Replace("יו", "טז");
+            }
+            else if (strTemp.Contains("רעה"))
+            {
+                strTemp = strTemp.Replace("רעה", "ערה");
+            }
+            else if (strTemp.Contains("רצח"))
+            {
+                strTemp = strTemp.Replace("רצח", "רחצ");
+            }
+            else if (strTemp.Contains("רע"))
+            {
+                strTemp = strTemp.Replace("רע", "ער");
+            }
+            else if (strTemp.Contains("שד"))
+            {
+                strTemp = strTemp.Replace("שד", "דש");
+            }
+            else if (strTemp.Contains("שמד"))
+            {
+                strTemp = strTemp.Replace("שמד", "שדמ");
+            }
+            return strTemp;
+        }
+        public static string NumberToHebChodesName(int hebrewMonth, int Shana)
+        {
+            HebrewCalendar hebrewCalendar = new HebrewCalendar(); // מאתחל את לוח השנה העברי
+            string[] hebrewMonths = new string[] {
+            "","תשרי", "חשוון", "כסלו", "טבת", "שבט", "אדר", "אדר א'", "אדר ב'","ניסן", "אייר", "סיון", "תמוז", "אב", "אלול"
+            };
+
+            string monthName = ""; // משתנה לאחסון שם החודש העברי
+
+            if (hebrewMonth < 6)
+            {
+                monthName = hebrewMonths[hebrewMonth];
+            }
+            else if (hebrewCalendar.IsLeapYear(Shana))
+            {
+                hebrewMonth++;
+                monthName = hebrewMonths[hebrewMonth];
+            }
+            else if (hebrewMonth == 6)
+            {
+                monthName = hebrewMonths[hebrewMonth];
+            }
+            else
+            {
+                hebrewMonth += 2;
+                monthName = hebrewMonths[hebrewMonth];
+            }
+            return monthName;
+
+        }
+        public static int HebCodeshNameToNumber(string monthName, int YearNumber)
+        {
+            HebrewCalendar hebrewCalendar = new HebrewCalendar(); // מאתחל את לוח השנה העברי
+
+            // Convert Hebrew month name to its corresponding number
+            switch (monthName)
+            {
+                case "תשרי": return 1;
+                case "חשוון":
+                case "מרחשון": // Added for compatibility
+                case "חשון":  // Added for compatibility
+                case "מר-חשוון":
+                case "מרחשוון": return 2; // Added for compatibility
+                case "כסלו":
+                case "כסליו": return 3; // Added for compatibility
+                case "טבת": return 4;
+                case "שבט": return 5;
+                
+                //case "אדר א": return 6;
+                //case "אדר ב": return 7;
+                default:
+                    if (hebrewCalendar.IsLeapYear(YearNumber))
+                    {
+                        switch (monthName)
+                        {
+                            case "אדר": throw new ArgumentException("השנה שנבחרה הינה שנה מעוברת יש לבחור אדר א' או ב'");
+                            case "אדר א": return 6;
+                            case "אדר ב": return 7;
+                            case "ניסן": return 8;
+                            case "אייר": return 9;
+                            case "סיון": return 10;
+                            case "תמוז": return 11;
+                            case "אב": return 12;
+                            case "אלול": return 13;
+                        }
+                    }
+                    else
+                    {
+                        switch (monthName)
+                        {
+                            case "אדר": return 6;
+                            case "אדר א": throw new ArgumentException("השנה שנבחרה אינה מעוברת");
+                            case "אדר ב": throw new ArgumentException("השנה שנבחרה אינה מעוברת");
+                            case "ניסן": return 7;
+                            case "אייר": return 8;
+                            case "סיון": return 9;
+                            case "תמוז": return 10;
+                            case "אב": return 11;
+                            case "אלול": return 12;
+                        }
+                    }
+                    break; // Ensure control does not fall out of the switch
+            }
+
+            // Return a default value if no match is found
+            return 0;
+        }
+    }
+}
+</file>
+
+<file path="HebDate.cs">
+using System;
+using System.Globalization;
+
+namespace DateConv
+{
+    internal class HebDate
+    {
+        public static int[] ConvertToHebrewDate(DateTime gregorianDate)
+        {
+            HebrewCalendar hebrewCalendar = new HebrewCalendar();
+
+            int year = (hebrewCalendar.GetYear(gregorianDate)) % 1000;
+            int month = hebrewCalendar.GetMonth(gregorianDate);
+            int day = hebrewCalendar.GetDayOfMonth(gregorianDate);
+            int elef = (hebrewCalendar.GetYear(gregorianDate)) / 1000;
+            // Return an array with day, month, year, and a placeholder value (e.g., 0)
+            return new int[] { day, month, year, elef };
+        }
+
+        public static DateTime ConvertIntToGregorianDate(int hebrewYear, int hebrewMonth, int hebrewDay)
+        {
+            HebrewCalendar hebrewCalendar = new HebrewCalendar();
+
+            try
+            {
+                // יצירת תאריך לועזי מתוך תאריך עברי
+                DateTime gregorianDate = hebrewCalendar.ToDateTime(hebrewYear, hebrewMonth, hebrewDay, 0, 0, 0, 0);
+                return gregorianDate;
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                // טיפול במקרה של תאריך עברי לא תקין
+                if (hebrewDay == 30)
+                {
+                    try
+                    {                         // אם התאריך הוא ה-30 בחודש, ננסה להמיר אותו ל-29
+                        DateTime gregorianDate = hebrewCalendar.ToDateTime(hebrewYear, hebrewMonth, 29, 0, 0, 0, 0);
+                        throw new ArgumentException("בחודש שנבחר אין יום ל'.");
+                    }
+                    catch (ArgumentOutOfRangeException)
+                    {
+                    }
+                }
+                throw new ArgumentException("התאריך העברי שסופק אינו תקין.");
+            }
+        }
+        public static DateTime convertStrToGregDate(string str)
+        {
+            string[] parts = str.Split(new[] { ' ', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            int[] hebDate = new int[3];
+            if (parts.Length == 3)
+            {
+                hebDate[0] = Gimatria.ConvertToGimatria(parts[0]); // day
+                hebDate[2] = Gimatria.ConvertToGimatria(parts[2]); // year
+                hebDate[1] = Gimatria.HebCodeshNameToNumber(parts[1], hebDate[2]); // month
+            }
+            else if (parts.Length == 4)
+            {
+                hebDate[0] = Gimatria.ConvertToGimatria(parts[0]); // day
+                hebDate[2] = Gimatria.ConvertToGimatria(parts[3]); // year
+                hebDate[1] = Gimatria.HebCodeshNameToNumber(parts[1] + " " + parts[2], hebDate[2]); // month
+            }
+
+            DateTime GregDate = ConvertIntToGregorianDate(hebDate[2], hebDate[1], hebDate[0]);
+            return GregDate;
+        }
+    }
+}
+</file>
+
+<file path="LICENSE.txt">
+MIT License
+
+Copyright (c) [year] [fullname]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+</file>
+
+<file path="Parse.cs">
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace DateConv
+{
+    internal class Parse
+    {
+        /// <summary>
+        /// Takes a date from the calendar and returns it in DateTime format.
+        /// </summary>
+        /// <param name="isHebrew">Indicates whether the input date is Hebrew or Gregorian.</param>
+        /// <param name="day">The day of the month.</param>
+        /// <param name="month">The month (name or number).</param>
+        /// <param name="year">The year.</param>
+        /// <returns>A DateTime object representing the date.</returns>
+        public static DateTime GetDateFromCalendar(bool isHebrew, string day, string month, string year)
+        {
+            if (isHebrew)
+            {
+                // Convert Hebrew date to Gregorian date
+                int hebDay = Gimatria.ConvertToGimatria(day);
+                int hebYear = Gimatria.ConvertToGimatria(year);
+                int hebMonth = Gimatria.HebCodeshNameToNumber(month, hebYear);
+                return HebDate.ConvertIntToGregorianDate(hebYear, hebMonth, hebDay);
+            }
+            else
+            {
+                // Convert Gregorian date components to DateTime
+                int gregDay = int.Parse(day);
+                int gregMonth = int.Parse(month);
+                int gregYear = int.Parse(year);
+                return new DateTime(gregYear, gregMonth, gregDay);
+            }
+        }
+    }
+}
+</file>
+
+<file path="Program.cs">
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
+
+namespace DateConv
+{
+    internal static class Program
+    {
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        static void Main()
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Form1());
+        }
+    }
+}
+</file>
+
+<file path="Properties/AssemblyInfo.cs">
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+
+// General Information about an assembly is controlled through the following
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+[assembly: AssemblyTitle("DateConv")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("DateConv")]
+[assembly: AssemblyCopyright("Copyright ©  2025")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+
+// Setting ComVisible to false makes the types in this assembly not visible
+// to COM components.  If you need to access a type in this assembly from
+// COM, set the ComVisible attribute to true on that type.
+[assembly: ComVisible(false)]
+
+// The following GUID is for the ID of the typelib if this project is exposed to COM
+[assembly: Guid("d1fce3ed-63e1-4151-84a7-9a0f2088720a")]
+
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version
+//      Build Number
+//      Revision
+//
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
+</file>
+
+<file path="Properties/Resources.Designer.cs">
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//     Runtime Version:4.0.30319.42000
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+namespace DateConv.Properties
+{
+
+
+    /// <summary>
+    ///   A strongly-typed resource class, for looking up localized strings, etc.
+    /// </summary>
+    // This class was auto-generated by the StronglyTypedResourceBuilder
+    // class via a tool like ResGen or Visual Studio.
+    // To add or remove a member, edit your .ResX file then rerun ResGen
+    // with the /str option, or rebuild your VS project.
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+    internal class Resources
+    {
+
+        private static global::System.Resources.ResourceManager resourceMan;
+
+        private static global::System.Globalization.CultureInfo resourceCulture;
+
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        internal Resources()
+        {
+        }
+
+        /// <summary>
+        ///   Returns the cached ResourceManager instance used by this class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Resources.ResourceManager ResourceManager
+        {
+            get
+            {
+                if ((resourceMan == null))
+                {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DateConv.Properties.Resources", typeof(Resources).Assembly);
+                    resourceMan = temp;
+                }
+                return resourceMan;
+            }
+        }
+
+        /// <summary>
+        ///   Overrides the current thread's CurrentUICulture property for all
+        ///   resource lookups using this strongly typed resource class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Globalization.CultureInfo Culture
+        {
+            get
+            {
+                return resourceCulture;
+            }
+            set
+            {
+                resourceCulture = value;
+            }
+        }
+    }
+}
+</file>
+
+<file path="Properties/Resources.resx">
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>
+</file>
+
+<file path="Properties/Settings.Designer.cs">
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//     Runtime Version:4.0.30319.42000
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+namespace DateConv.Properties
+{
+
+
+    [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "11.0.0.0")]
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
+    {
+
+        private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
+
+        public static Settings Default
+        {
+            get
+            {
+                return defaultInstance;
+            }
+        }
+    }
+}
+</file>
+
+<file path="Properties/Settings.settings">
+<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>
+</file>
+
+<file path="README.md">
+# DateConv
+המרת תאריכים מתאריך עברי לתאריך לועזי
+### התוכנה נועדה לעודד שימוש בתאריך עברי, ולא בלועזי
+</file>
+
+</files>
