@@ -16,6 +16,7 @@ namespace DateConv
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.comboBoxHebShana = new System.Windows.Forms.ComboBox();
             this.comboBoxHebElef = new System.Windows.Forms.ComboBox();
@@ -3602,6 +3603,7 @@ namespace DateConv
             this.Controls.Add(this.buttonShmira);
             this.Controls.Add(this.groupBoxHeb);
             this.Controls.Add(this.groupBoxGreg);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
