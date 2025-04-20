@@ -1060,7 +1060,7 @@ namespace DateConv
             this.comboBoxHebShana.Location = new System.Drawing.Point(46, 78);
             this.comboBoxHebShana.Name = "comboBoxHebShana";
             this.comboBoxHebShana.Size = new System.Drawing.Size(98, 28);
-            this.comboBoxHebShana.TabIndex = 1;
+            this.comboBoxHebShana.TabIndex = 3;
             // 
             // comboBoxHebElef
             // 
@@ -1074,7 +1074,7 @@ namespace DateConv
             this.comboBoxHebElef.Location = new System.Drawing.Point(150, 78);
             this.comboBoxHebElef.Name = "comboBoxHebElef";
             this.comboBoxHebElef.Size = new System.Drawing.Size(51, 28);
-            this.comboBoxHebElef.TabIndex = 2;
+            this.comboBoxHebElef.TabIndex = 10;
             // 
             // comboBoxHebChodesh
             // 
@@ -1097,7 +1097,7 @@ namespace DateConv
             this.comboBoxHebChodesh.Location = new System.Drawing.Point(207, 78);
             this.comboBoxHebChodesh.Name = "comboBoxHebChodesh";
             this.comboBoxHebChodesh.Size = new System.Drawing.Size(101, 28);
-            this.comboBoxHebChodesh.TabIndex = 3;
+            this.comboBoxHebChodesh.TabIndex = 2;
             // 
             // comboBoxHebYom
             // 
@@ -1136,7 +1136,7 @@ namespace DateConv
             this.comboBoxHebYom.Location = new System.Drawing.Point(314, 78);
             this.comboBoxHebYom.Name = "comboBoxHebYom";
             this.comboBoxHebYom.Size = new System.Drawing.Size(60, 28);
-            this.comboBoxHebYom.TabIndex = 4;
+            this.comboBoxHebYom.TabIndex = 1;
             // 
             // comboBoxGregShana
             // 
@@ -3347,7 +3347,7 @@ namespace DateConv
             this.comboBoxGregShana.Name = "comboBoxGregShana";
             this.comboBoxGregShana.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.comboBoxGregShana.Size = new System.Drawing.Size(110, 28);
-            this.comboBoxGregShana.TabIndex = 5;
+            this.comboBoxGregShana.TabIndex = 6;
             // 
             // comboBoxGregChodesh
             // 
@@ -3369,7 +3369,7 @@ namespace DateConv
             this.comboBoxGregChodesh.Name = "comboBoxGregChodesh";
             this.comboBoxGregChodesh.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.comboBoxGregChodesh.Size = new System.Drawing.Size(152, 28);
-            this.comboBoxGregChodesh.TabIndex = 6;
+            this.comboBoxGregChodesh.TabIndex = 5;
             // 
             // comboBoxGregYom
             // 
@@ -3410,7 +3410,7 @@ namespace DateConv
             this.comboBoxGregYom.Name = "comboBoxGregYom";
             this.comboBoxGregYom.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.comboBoxGregYom.Size = new System.Drawing.Size(54, 28);
-            this.comboBoxGregYom.TabIndex = 7;
+            this.comboBoxGregYom.TabIndex = 4;
             // 
             // dateTimePickerGreg
             // 
@@ -3474,7 +3474,7 @@ namespace DateConv
             // 
             // buttonCopyHeb
             // 
-            this.buttonCopyHeb.Location = new System.Drawing.Point(242, 0);
+            this.buttonCopyHeb.Location = new System.Drawing.Point(237, 0);
             this.buttonCopyHeb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.buttonCopyHeb.Name = "buttonCopyHeb";
             this.buttonCopyHeb.Size = new System.Drawing.Size(30, 30);
@@ -3549,7 +3549,7 @@ namespace DateConv
             // 
             // buttonCopyGreg
             // 
-            this.buttonCopyGreg.Location = new System.Drawing.Point(242, 0);
+            this.buttonCopyGreg.Location = new System.Drawing.Point(237, 0);
             this.buttonCopyGreg.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.buttonCopyGreg.Name = "buttonCopyGreg";
             this.buttonCopyGreg.Size = new System.Drawing.Size(30, 30);
@@ -3603,11 +3603,14 @@ namespace DateConv
             this.Controls.Add(this.buttonShmira);
             this.Controls.Add(this.groupBoxHeb);
             this.Controls.Add(this.groupBoxGreg);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
-            this.Text = "המרת תאריכים";
+            this.Text = "המרה עברי <-> לועזי";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBoxHeb.ResumeLayout(false);
             this.groupBoxHeb.PerformLayout();

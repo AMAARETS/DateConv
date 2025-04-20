@@ -27,7 +27,33 @@ namespace DateConv
             this.ListBoxHeb.DoubleClick += new System.EventHandler(this.listBox_DoubleClick);
             ListBoxGreg.SelectedIndexChanged += SyncListBoxes;
             ListBoxHeb.SelectedIndexChanged += SyncListBoxes;
+            var combos = new[] {
+        comboBoxHebShana, comboBoxHebElef, comboBoxHebChodesh, comboBoxHebYom,
+        comboBoxGregShana, comboBoxGregChodesh, comboBoxGregYom
+    };
+
+            foreach (var cb in combos)
+            {
+                // כדי לודא ש‑Tab ייכנס ל‑KeyDown
+                cb.PreviewKeyDown += (s, ev) =>
+                {
+                    if (ev.KeyCode == Keys.Tab)
+                    {
+                        ev.IsInputKey = true;
+                    }
+                };
+                cb.KeyDown += ComboBox_KeyDown;
+            }
+            comboBoxGregChodesh.Validating += (s, e) =>
+            {
+                if (int.TryParse(comboBoxGregChodesh.Text, out int monthNumber))
+                {
+                    if (monthNumber >= 1 && monthNumber <= comboBoxGregChodesh.Items.Count)
+                        comboBoxGregChodesh.SelectedIndex = monthNumber - 1;
+                }
+            };
         }
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -38,6 +64,18 @@ namespace DateConv
             customHebDate.setHebDate(customDate.GetDate());
             HagComBoxs();
         }
+        // מתודת עזר לטיפול ב‑Space
+        private void ComboBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Space)
+            {
+                // מעביר פוקוס לקומבובוקס הבא בסדר
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.SuppressKeyPress = true;
+                e.Handled = true;
+            }
+        }
+
         private void HagComBoxs()
         {
             isProgrammaticChange = true; // סימון שהשינוי תכנותי
