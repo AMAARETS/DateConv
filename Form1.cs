@@ -34,14 +34,6 @@ namespace DateConv
 
             foreach (var cb in combos)
             {
-                // כדי לודא ש‑Tab ייכנס ל‑KeyDown
-                cb.PreviewKeyDown += (s, ev) =>
-                {
-                    if (ev.KeyCode == Keys.Tab)
-                    {
-                        ev.IsInputKey = true;
-                    }
-                };
                 cb.KeyDown += ComboBox_KeyDown;
             }
             comboBoxGregChodesh.Validating += (s, e) =>
@@ -291,5 +283,24 @@ namespace DateConv
             _isSyncing = false;                    // מסיימים סנכרון
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            customDate.SetDate(DateTime.Now);
+            customHebDate.setHebDate(customDate.GetDate());
+            HagComBoxs();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            customDate.SetDate(DateTime.Now);
+            customHebDate.setHebDate(customDate.GetDate());
+            HagComBoxs();
+        }
+
+        private void buttonMechakHistory_Click(object sender, EventArgs e)
+        {
+            ListBoxGreg.Items.Clear();
+            ListBoxHeb.Items.Clear();
+        }
     }
 }

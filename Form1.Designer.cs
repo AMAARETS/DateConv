@@ -42,6 +42,9 @@ namespace DateConv
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.ListBoxGreg = new DateConv.SyncListBox();
             this.ListBoxHeb = new DateConv.SyncListBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.buttonMechakHistory = new System.Windows.Forms.Button();
             this.groupBoxHeb.SuspendLayout();
             this.groupBoxGreg.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -3424,6 +3427,7 @@ namespace DateConv
             // labelShanaGreg
             // 
             this.labelShanaGreg.AutoSize = true;
+            this.labelShanaGreg.BackColor = System.Drawing.Color.LightSteelBlue;
             this.labelShanaGreg.Location = new System.Drawing.Point(306, 49);
             this.labelShanaGreg.Name = "labelShanaGreg";
             this.labelShanaGreg.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -3434,6 +3438,7 @@ namespace DateConv
             // labelChodeshGreg
             // 
             this.labelChodeshGreg.AutoSize = true;
+            this.labelChodeshGreg.BackColor = System.Drawing.Color.LightSteelBlue;
             this.labelChodeshGreg.Location = new System.Drawing.Point(158, 49);
             this.labelChodeshGreg.Name = "labelChodeshGreg";
             this.labelChodeshGreg.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -3444,6 +3449,7 @@ namespace DateConv
             // labelYomGreg
             // 
             this.labelYomGreg.AutoSize = true;
+            this.labelYomGreg.BackColor = System.Drawing.Color.LightSteelBlue;
             this.labelYomGreg.Location = new System.Drawing.Point(68, 49);
             this.labelYomGreg.Name = "labelYomGreg";
             this.labelYomGreg.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -3453,6 +3459,7 @@ namespace DateConv
             // 
             // groupBoxHeb
             // 
+            this.groupBoxHeb.Controls.Add(this.button1);
             this.groupBoxHeb.Controls.Add(this.buttonCopyHeb);
             this.groupBoxHeb.Controls.Add(this.dateTimePicker2);
             this.groupBoxHeb.Controls.Add(this.label4);
@@ -3474,12 +3481,12 @@ namespace DateConv
             // 
             // buttonCopyHeb
             // 
-            this.buttonCopyHeb.Location = new System.Drawing.Point(237, 0);
+            this.buttonCopyHeb.Location = new System.Drawing.Point(199, 0);
             this.buttonCopyHeb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.buttonCopyHeb.Name = "buttonCopyHeb";
-            this.buttonCopyHeb.Size = new System.Drawing.Size(30, 30);
+            this.buttonCopyHeb.Size = new System.Drawing.Size(68, 30);
             this.buttonCopyHeb.TabIndex = 17;
-            this.buttonCopyHeb.Text = "C";
+            this.buttonCopyHeb.Text = "העתק";
             this.buttonCopyHeb.UseVisualStyleBackColor = true;
             this.buttonCopyHeb.Click += new System.EventHandler(this.buttonCopyHeb_Click);
             // 
@@ -3495,6 +3502,7 @@ namespace DateConv
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.LightSteelBlue;
             this.label4.Location = new System.Drawing.Point(155, 49);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(41, 20);
@@ -3504,6 +3512,7 @@ namespace DateConv
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.LightSteelBlue;
             this.label1.Location = new System.Drawing.Point(78, 49);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(39, 20);
@@ -3513,6 +3522,7 @@ namespace DateConv
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.LightSteelBlue;
             this.label2.Location = new System.Drawing.Point(248, 49);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(48, 20);
@@ -3522,6 +3532,7 @@ namespace DateConv
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.LightSteelBlue;
             this.label3.Location = new System.Drawing.Point(331, 49);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(32, 20);
@@ -3530,6 +3541,7 @@ namespace DateConv
             // 
             // groupBoxGreg
             // 
+            this.groupBoxGreg.Controls.Add(this.button2);
             this.groupBoxGreg.Controls.Add(this.buttonCopyGreg);
             this.groupBoxGreg.Controls.Add(this.dateTimePickerGreg);
             this.groupBoxGreg.Controls.Add(this.labelShanaGreg);
@@ -3549,12 +3561,12 @@ namespace DateConv
             // 
             // buttonCopyGreg
             // 
-            this.buttonCopyGreg.Location = new System.Drawing.Point(237, 0);
+            this.buttonCopyGreg.Location = new System.Drawing.Point(199, 0);
             this.buttonCopyGreg.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.buttonCopyGreg.Name = "buttonCopyGreg";
-            this.buttonCopyGreg.Size = new System.Drawing.Size(30, 30);
+            this.buttonCopyGreg.Size = new System.Drawing.Size(68, 30);
             this.buttonCopyGreg.TabIndex = 12;
-            this.buttonCopyGreg.Text = "C";
+            this.buttonCopyGreg.Text = "העתק";
             this.buttonCopyGreg.UseVisualStyleBackColor = true;
             this.buttonCopyGreg.Click += new System.EventHandler(this.buttonCopyGreg_Click);
             // 
@@ -3593,11 +3605,45 @@ namespace DateConv
             this.ListBoxHeb.Size = new System.Drawing.Size(188, 124);
             this.ListBoxHeb.TabIndex = 18;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(132, 0);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(59, 30);
+            this.button1.TabIndex = 18;
+            this.button1.Text = "היום";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(132, 0);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(59, 30);
+            this.button2.TabIndex = 19;
+            this.button2.Text = "היום";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // buttonMechakHistory
+            // 
+            this.buttonMechakHistory.Location = new System.Drawing.Point(137, 484);
+            this.buttonMechakHistory.Name = "buttonMechakHistory";
+            this.buttonMechakHistory.Size = new System.Drawing.Size(179, 34);
+            this.buttonMechakHistory.TabIndex = 20;
+            this.buttonMechakHistory.Text = "מחק היסטוריה";
+            this.buttonMechakHistory.UseVisualStyleBackColor = true;
+            this.buttonMechakHistory.Click += new System.EventHandler(this.buttonMechakHistory_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(438, 501);
+            this.BackColor = System.Drawing.Color.Lavender;
+            this.ClientSize = new System.Drawing.Size(441, 525);
+            this.Controls.Add(this.buttonMechakHistory);
             this.Controls.Add(this.ListBoxGreg);
             this.Controls.Add(this.ListBoxHeb);
             this.Controls.Add(this.buttonShmira);
@@ -3648,5 +3694,8 @@ namespace DateConv
         private System.Windows.Forms.Button buttonCopyGreg;
         private SyncListBox ListBoxGreg;
         private SyncListBox ListBoxHeb;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonMechakHistory;
     }
 }
