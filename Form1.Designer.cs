@@ -30,6 +30,7 @@ namespace DateConv
             this.labelChodeshGreg = new System.Windows.Forms.Label();
             this.labelYomGreg = new System.Windows.Forms.Label();
             this.groupBoxHeb = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.buttonCopyHeb = new System.Windows.Forms.Button();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
@@ -37,17 +38,21 @@ namespace DateConv
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBoxGreg = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.buttonCopyGreg = new System.Windows.Forms.Button();
             this.buttonShmira = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.buttonMechakHistory = new System.Windows.Forms.Button();
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ToolStripMenuItemPtach = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemYetsia = new System.Windows.Forms.ToolStripMenuItem();
             this.ListBoxGreg = new DateConv.SyncListBox();
             this.ListBoxHeb = new DateConv.SyncListBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.buttonMechakHistory = new System.Windows.Forms.Button();
             this.groupBoxHeb.SuspendLayout();
             this.groupBoxGreg.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dateTimePicker1
@@ -3479,6 +3484,17 @@ namespace DateConv
             this.groupBoxHeb.TabStop = false;
             this.groupBoxHeb.Text = "תאריך עברי";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(132, 0);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(59, 30);
+            this.button1.TabIndex = 18;
+            this.button1.Text = "היום";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // buttonCopyHeb
             // 
             this.buttonCopyHeb.Location = new System.Drawing.Point(199, 0);
@@ -3559,6 +3575,17 @@ namespace DateConv
             this.groupBoxGreg.TabStop = false;
             this.groupBoxGreg.Text = "תאריך לועזי";
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(132, 0);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(59, 30);
+            this.button2.TabIndex = 19;
+            this.button2.Text = "היום";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // buttonCopyGreg
             // 
             this.buttonCopyGreg.Location = new System.Drawing.Point(199, 0);
@@ -3587,6 +3614,47 @@ namespace DateConv
             this.errorProvider1.ContainerControl = this;
             this.errorProvider1.RightToLeft = true;
             // 
+            // buttonMechakHistory
+            // 
+            this.buttonMechakHistory.Location = new System.Drawing.Point(137, 484);
+            this.buttonMechakHistory.Name = "buttonMechakHistory";
+            this.buttonMechakHistory.Size = new System.Drawing.Size(179, 34);
+            this.buttonMechakHistory.TabIndex = 20;
+            this.buttonMechakHistory.Text = "מחק היסטוריה";
+            this.buttonMechakHistory.UseVisualStyleBackColor = true;
+            this.buttonMechakHistory.Click += new System.EventHandler(this.buttonMechakHistory_Click);
+            // 
+            // notifyIcon
+            // 
+            this.notifyIcon.ContextMenuStrip = this.contextMenuStrip1;
+            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
+            this.notifyIcon.Text = "המרת תאריכים";
+            this.notifyIcon.Visible = true;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripMenuItemPtach,
+            this.ToolStripMenuItemYetsia});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.contextMenuStrip1.Size = new System.Drawing.Size(129, 68);
+            // 
+            // ToolStripMenuItemPtach
+            // 
+            this.ToolStripMenuItemPtach.Name = "ToolStripMenuItemPtach";
+            this.ToolStripMenuItemPtach.Size = new System.Drawing.Size(128, 32);
+            this.ToolStripMenuItemPtach.Text = "פתח";
+            this.ToolStripMenuItemPtach.Click += new System.EventHandler(this.ToolStripMenuItemPtach_Click);
+            // 
+            // ToolStripMenuItemYetsia
+            // 
+            this.ToolStripMenuItemYetsia.Name = "ToolStripMenuItemYetsia";
+            this.ToolStripMenuItemYetsia.Size = new System.Drawing.Size(128, 32);
+            this.ToolStripMenuItemYetsia.Text = "יציאה";
+            this.ToolStripMenuItemYetsia.Click += new System.EventHandler(this.ToolStripMenuItemYetsia_Click);
+            // 
             // ListBoxGreg
             // 
             this.ListBoxGreg.FormattingEnabled = true;
@@ -3604,38 +3672,6 @@ namespace DateConv
             this.ListBoxHeb.Name = "ListBoxHeb";
             this.ListBoxHeb.Size = new System.Drawing.Size(188, 124);
             this.ListBoxHeb.TabIndex = 18;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(132, 0);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(59, 30);
-            this.button1.TabIndex = 18;
-            this.button1.Text = "היום";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(132, 0);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(59, 30);
-            this.button2.TabIndex = 19;
-            this.button2.Text = "היום";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // buttonMechakHistory
-            // 
-            this.buttonMechakHistory.Location = new System.Drawing.Point(137, 484);
-            this.buttonMechakHistory.Name = "buttonMechakHistory";
-            this.buttonMechakHistory.Size = new System.Drawing.Size(179, 34);
-            this.buttonMechakHistory.TabIndex = 20;
-            this.buttonMechakHistory.Text = "מחק היסטוריה";
-            this.buttonMechakHistory.UseVisualStyleBackColor = true;
-            this.buttonMechakHistory.Click += new System.EventHandler(this.buttonMechakHistory_Click);
             // 
             // Form1
             // 
@@ -3657,12 +3693,14 @@ namespace DateConv
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
             this.Text = "המרה עברי <-> לועזי";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1Cloce);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBoxHeb.ResumeLayout(false);
             this.groupBoxHeb.PerformLayout();
             this.groupBoxGreg.ResumeLayout(false);
             this.groupBoxGreg.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3697,5 +3735,9 @@ namespace DateConv
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button buttonMechakHistory;
+        private System.Windows.Forms.NotifyIcon notifyIcon;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemPtach;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemYetsia;
     }
 }

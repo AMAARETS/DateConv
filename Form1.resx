@@ -112,19 +112,84 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="errorProvider1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="errorProvider1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>40</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAEAICAAAAEAGACoDAAAFgAAACgAAAAgAAAAQAAAAAEAGAAAAAAAAAAAAMQOAADEDgAAAAAAAAAA
+        AADz9Pbz9Pbz9fbz9Pbz8/Xz8/bz9Pfx8/Xz8/bz9Pbz9PXz9fby9PX19vfy8/by9fbx8fTz9Pbz9Pfy
+        8vPx8/T09fXz8/Xz9PX09Pbz9fXz8/b09fbz9fX09Pb08/Xy9Pb09fXz8/Xy9PTy9PXz9PTz9fby9PTz
+        9PT09ffx8/Tz8/by8/Xx8/Xy8/Ty8/Xy8/Xx8/Tz9fbz9PXy8/X09fXy9Pb09fbz8/Xy9PXy9fbz9Pby
+        9PXy8/Xy9PTz8vTy9PTz9PXz8/by9fb09fbz8/Xy9PXy9Pb09Pby9PXz9Pbz9PT09Pby9Pbw8vPz9PXy
+        8vT08/Xy8vPy8/Ty8/Xy9PXz9fbz9Pby9PT09PXz9fbz9PXy9PXy9PXx8/Tz9fbz9fXz9fby9PTy8/Xy
+        8/Tz9Pby9PXy8/bz9PXy9fX09fby8vTz9PXz9Pby9fXy8/Ty8/Xz8/Xz9fby9PXy8/Tx9PTz9fXz9fXy
+        9fbz9PX19fbz9Pby8vXz9fbz9ffx8/Xy9fXy8/Ty8/T09Pbz9PX09PW0axmybRmvbRi0bRqybhuzbRiy
+        bhqzbhqzbBi0bxuybhuybBaybRuxbRixbBi0bxqzbhmzbRqxbRiwbBexbhqxbRj08/Xz9PXz8/Tz9PTz
+        8/Xz9Pby8/Xy9Pby9PaxbBf1+frz9PXx8/Ty8/Xz9PXz9fbz9Pbx8vPy8/X09fbz8/Xy9Pbz9Pfz9ffy
+        8/Ty9fXz9fX08/by9PTy9PPy8/Tx9fS0cBvz9Pby9PXy9PXy9PTx8/Xz9PPz9Pbz8vWzbhvz8/Xz8/Xy
+        8/Xy9PXy9PXy8/Xy8vby9PXz8/Ty8fTy8/Xy8vPy8/P09PXy8/Py9PXy9PT19ffy8/Xy9PXz9Pbz8/ax
+        ahjz8/Xz8/Ty9fXz9PXz9Pb08/Tx8/Tz9PaxbRrx8/Tz9fXz9vXy8/Py8vTy8/Ty8/fz8/Xy8/Xy9PTz
+        9PXy9Pbx8/Xz8/by9PXx8vXz8vXz8/bz8/Tz9ffz9PXy9fazbBjy9PXy9fXy9PXy9Pb08/bz9PXy9Pby
+        9PSybRry8/Xy8vXy9PSzbxzy8/WzcxWvahS0bhmzcBvy8/X09fbw9PPz8/Tx8/bz9PXy8vPy8/Pz9PTz
+        8vTy8/Ty8vTy8/Wzbhnz9Pby9PX09vfz9PX19ffy9PXy8vT09fezbhry9PTz8/bz9PazbRn09PXw9PXx
+        8vPt7vD2/vvz9PT09Pby8vaxbxr09fb08/SzbRuzbRi0bhnz8/T8+//19vnz9PSxbRj09Pby9fXz9fbx
+        8vTz9fXz9PXz9Pbz9PazbRrz9Pbz9PXy8/W1cRzy8/Xy9Pb4+Pe0cRvx8/X9///z8vby8vS1bhvy8vTz
+        9Pa0dB6ybhrz9Pfz9favVgnw9Pby8/Wybhn09fbz8/Xw8fTx8fTz9vjz9PXz8/Ty8/a2bxzy8/Xz8/W0
+        bRmybxrz8/e1bxnz8/W2eyHv8fWybRrx9PW2dyGxbxy0bhr39/qwXw+4aiL6//+jUAG0bxW0cBry9Pax
+        axfy9Pby9PXz9PX09Pb08/T09Pbx9PTx8/W1bxzz8/Ty9PXx8vO0bBjz9PTz8/W1bxu0bhrz8/XXt5fx
+        8/Xy9PXy9fby8/SfRQDy8fHy8/Ty8/Xy9PX09fXz8/Xz8/Wzbxzz8/Xy9PXy8/Xz9PXz9Pbz9fby9Pbz
+        9Pazbhrz9PXz9Pbx8/bz9Pbz9PXy9PXx8vT09Pbz9PX09fb08/Ty8/by9Pby8/T09fbz9Pby8vTz9Pfy
+        9PX09ff09Pfy8/Szbhvy9PXz9fb19Pby8/Xz8/Xz9PXy9Pby8/S0bRzx8/Py9PX8/fu0bhzy8PTy9fW1
+        chizcBvx9Pby9Pazbxzy9fXz9Pby9PXy8vTz8/by9PXy8/Tz9PXy9PXz9fby9Pazbxvy9PXz9Pbz9fbz
+        8/by8/Xz9Pfz8/b09Payaxny8vXy9PS1bhvy9PWybBry8vS6dyLy8/SybBfy8/azaxnz8/Xy9PXy8/S2
+        bxrz9Pbz9Pby8vP7//+wYAny9PXy8/W0bhry8/bz9PXy9Pbz9fby9fbz9PXz9fbw8vOybBjx8vTz8/Wy
+        bxr09fa0bRnx8/SxbBr09fa2bxnz8/fy8vTz8/Xy8/Tx9PSuaRfy9PXz8/Xz8/Tz8/WybBjz9Pbx8/Sz
+        bhrz8/Tz8vTy8/Xz9Pby9PT09PXx8/Xz8vWzbBry8vXz8/W3ch7y8/WybBjy8vSzbRrr5Nfz8/bz9PXy
+        8/TPpIDy8/azbBmzbhuybhSdRAD28/O0bBq0bxrz9Pby9PaybBj09Pby8/Ty9PTy8/Ty9PTz8/Ty9Pby
+        8vSxbhjy8/Xx8/SxbBijTwCybBjz9PazbxqzbRqxbBrz9fby8/W0bx7y9PXx8/Xz8vTz9Pnz9fXz9PTy
+        8/Xy9fbz9fbx8/Wzbhzy8/Xz9fby8/Xy8/Xx8/Xz8/Xy9PXz8/Szbhzz9Pbz9Pfy8/Xy9fby9PXy9fbz
+        9PXy8/Tz9PXz9Pby8/Ty8/b09vfy8/Ty8vTz9Pby9PX09Pfz9Pb09Pby9PXy8/Wybhny8vPz9Pbz9PX0
+        9fby8/bx8/Tx9PXx8/W1bhvz8/Xz9PXy8/Xy8vXy8/bz8/Xz9ffy9PTz9fby8/Tz9fbz8/Xz8/Ty9PXy
+        9PTz8/Xx9fT09PXz9PTz9fb08/Xy9PWybBfy9PTy8/b09PXy8/X19vfy8vTz9Pbz9PazbRqzcB20cSCz
+        bxuzcB+1cByzcB6zcyCzcR2zcB20cBy0cx+zbhmycRqwbx2zcCCzcRyycBuxbhyzcR2ybhy1cx6ycR60
+        bhrz9PXz9fbz8vTz9PX09ffy9PTy8/Xz8/WybhmwaxiybRmybBixaxiyaxexbRmzbhqxbBqzbxqybRuy
+        bRe0bhq0cBu0bhmybBiybRizbhmzbRmybRqxbRm0bRqybRizbhv09fX09PXz9fjz9Pjy9fTz9Pfy8/Py
+        8/SybRm0bxy0cBuzbRl7TRiybRl8TxizbhqzbxqybBmzbhuybxm0bxqybBq1bxuzbxyxbRl9UBi1bhp9
+        UReybBqzbRmybhm1bhzz9fXz9PXz8/Xx9PXz9PXy9fbz9PT09fe1cB2zbBmxbBi0bhyybRq2bhmxaxey
+        bRq0bxu0bRqzbRmzbRmybRm1bRyzaxmxahaxbRm0cB2ybBmxbBmzbBqwaxi0bhuzbhv09fbz9Pbz9PT0
+        9fbz8/Xx9fXy8/bz8/W1cBqybRmxaxqzbRizbhqybRqybRizbhqzbhqybhuybRmxbBezbRq0bxyybRq0
+        bRmzbRqzbhqybRiybxqybxqxbBmxbRmycB7y9Pbz9fbz9Pby9Pbz8/Xz9fXz8/Xy8/T09Pbw8/WjTQCm
+        TQCzbhuxbRmxaximTgGlTQClTQGiSgClTQCmTAKkTgKjTQGmUACmTACzbBmybRmybRmkTwKkSgDx9fbz
+        9fXz9fbz8/Xx8vTz9Pby9ffx8/Xz9PXy9PXy8/Tz9Pbz9ffz9PeybRm0bhmxbBbz8/Xz9Pby8/Xz9PT0
+        9fXz9fby9fXz8/Xy8vXz8/SzbhmybhqzbBn09fXz9fbz9Pbz9Pb09vXz9PXy9Pb09fXz9fTy9PXx8/Xz
+        9PXy8/Xz8/Tz9PX09fbx8vOwZhHz8/Xy9fbz9Pbz8/Xx9Pb19vXz8/X09vfz9PXx8vPz9PX09verWwjz
+        8/Ty8/Pz8/Tz8/b09ffy9PTy9vXz9Pfz8/Tz9Pby9PXy9PXy8/Tz9PTy9PXy9Pfy9PXy8/b09ffz9PTy
+        8/Xy9PXy9Pfz9ffy8/Tz9fbz8vXx8vTy8/Xz9Pbx8vXz9PXy9fX09fb19/fz9fXz9PXy9PTz8/X19Pfz
+        8/Ty9PXx8/Xy9PX09vf09fXz9fXz9fb09Pbz8/Xx8/Pz9PXy8/bx8vTz9ffz9PTz9PXz8/by9Pbz8/Xz
+        9fby8/T09fby9Pbz9PXz8/Xy8/Xz8vXz9Pb09PXy9fXy9PXy9fXy8/bz9PXz9fby9fby8vTx9PTz9PXy
+        9Pfz8/Xz8/Xz8/Xy8/Xz8/bx8/Tz8/Tz9Pfy8/X09fXz8/Pz9PXz8/Xz8/Ty9PT09PXz9PXz8/Xx9PX2
+        9fjz9PTy9PTz8/Xz9fYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+</value>
+  </data>
+  <metadata name="notifyIcon.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>198, 17</value>
+  </metadata>
+  <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>345, 17</value>
+  </metadata>
+  <data name="notifyIcon.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAICAAAAEAGACoDAAAFgAAACgAAAAgAAAAQAAAAAEAGAAAAAAAAAAAAMQOAADEDgAAAAAAAAAA
         AADz9Pbz9Pbz9fbz9Pbz8/Xz8/bz9Pfx8/Xz8/bz9Pbz9PXz9fby9PX19vfy8/by9fbx8fTz9Pbz9Pfy

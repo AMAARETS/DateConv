@@ -9,6 +9,7 @@ namespace DateConv
         private CustomDate customDate; // Add a field to hold the CustomDate instance
         private CustomHebDate customHebDate; // Add a field to hold the CustomHebDate instance        
         private bool isProgrammaticChange = false;
+        private TextSelectionReader _reader;
         public Form1()
         {
             InitializeComponent();
@@ -49,6 +50,7 @@ namespace DateConv
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            _reader = new TextSelectionReader();
             // Initialize the CustomDate instance with the current date
             customDate = new CustomDate();
             customDate.SetDate(DateTime.Now);
@@ -302,5 +304,54 @@ namespace DateConv
             ListBoxGreg.Items.Clear();
             ListBoxHeb.Items.Clear();
         }
-    }
+
+        private void Form1Cloce(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            this.WindowState = FormWindowState.Minimized;
+            this.ShowInTaskbar = false;
+            notifyIcon.Visible = true;
+        }
+
+        private void ToolStripMenuItemPtach_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Normal;
+            this.ShowInTaskbar = true;
+            this.Activate();
+        }
+
+        private void ToolStripMenuItemYetsia_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+        protected override void WndProc(ref Message m)
+        {
+            const int WM_HOTKEY = 0x0312;                       // קבוע הודעת הוק המקשים
+            if (m.Msg == WM_HOTKEY && m.WParam.ToInt32() == 1)
+            {
+                try
+                {
+                    // ניסיון לקבלת הטקסט שנבחר בעזרת כל אחת מהשיטות
+                    string selected = _reader.TryGetSelectedTextFromActiveControl();
+                    if (!string.IsNullOrEmpty(selected))
+                    {
+                        // הצגת הטקסט שנבחר בהודעה
+                        MessageBox.Show(this, selected, "טקסט נבחר", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        // אם לא נמצא טקסט
+                        MessageBox.Show(this, "לא נמצא טקסט נבחר", "שגיאה", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // טיפול בשגיאות לא צפויות
+                    MessageBox.Show(this, ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            base.WndProc(ref m);                                 // קריאה לבסיס כדי שיודעות להיבנות הודעות אחרות
+        }
+    
+}
 }

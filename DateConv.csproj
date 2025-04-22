@@ -53,12 +53,17 @@
     <ApplicationIcon>ChatGPT Image Apr 20, 2025, 11_10_21 AM.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Accessibility" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationClient1">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\UIAutomationClient.dll</HintPath>
+    </Reference>
+    <Reference Include="UIAutomationTypes" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="C:/t/.net/DateConv/DateConv/\CustomDate.cs">
@@ -80,6 +85,7 @@
     <Compile Include="SyncListBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="TextSelectionReader.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -113,6 +119,26 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ChatGPT Image Apr 20, 2025, 11_10_21 AM.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="UIA">
+      <Guid>{930299CE-9965-4DEC-B0F4-A54848D4B667}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="UIAutomationClient">
+      <Guid>{944DE083-8FB8-45CF-BCB7-C477ACB2F897}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
